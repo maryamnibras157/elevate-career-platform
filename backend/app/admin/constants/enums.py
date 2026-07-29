@@ -1,0 +1,33 @@
+from enum import Enum
+
+class AdminRole(str, Enum):
+    SUPER_ADMIN = "SUPER_ADMIN"
+    ADMIN = "ADMIN"
+    EDITOR = "EDITOR"
+    VIEWER = "VIEWER"
+
+class Permission(str, Enum):
+    VIEW_USERS = "VIEW_USERS"
+    CREATE_USERS = "CREATE_USERS"
+    UPDATE_USERS = "UPDATE_USERS"
+    DELETE_USERS = "DELETE_USERS"
+    VIEW_CAREERS = "VIEW_CAREERS"
+    CREATE_CAREERS = "CREATE_CAREERS"
+    UPDATE_CAREERS = "UPDATE_CAREERS"
+    DELETE_CAREERS = "DELETE_CAREERS"
+    VIEW_ANALYTICS = "VIEW_ANALYTICS"
+    VIEW_RESUME_STATS = "VIEW_RESUME_STATS"
+
+class AnalyticsType(str, Enum):
+    USER = "USER"
+    CAREER = "CAREER"
+    RESUME = "RESUME"
+    INTERVIEW = "INTERVIEW"
+    AI_MENTOR = "AI_MENTOR"
+
+class ResourceType(str, Enum):
+    USER = "USER"
+    CAREER = "CAREER"
+    RESUME = "RESUME"
+    ROADMAP = "ROADMAP"
+    INTERVIEW = "INTERVIEW"

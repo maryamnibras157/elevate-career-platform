@@ -1,0 +1,3 @@
+"""
+Admin careers schemas package.
+"""

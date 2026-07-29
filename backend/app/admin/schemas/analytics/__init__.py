@@ -1,0 +1,3 @@
+"""
+Admin analytics schemas package.
+"""
