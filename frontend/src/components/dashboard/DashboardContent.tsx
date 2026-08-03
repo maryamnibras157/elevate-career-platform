@@ -25,12 +25,12 @@ const recentActivity = [
 
 const upcomingTasks = [
   { id: 1, title: 'Complete your skills profile', description: 'Add at least 10 skills to get better recommendations', priority: 'high', href: '/dashboard/profile' },
-  { id: 2, title: 'Upload your resume', description: 'Get an ATS score and detailed feedback', priority: 'medium', href: '/dashboard/resume' },
+  { id: 2, title: 'Upload your resume', description: 'Get an ATS score and detailed feedback', priority: 'medium', href: '/dashboard/ai/resume-analysis' },
   { id: 3, title: 'Review career roadmap', description: '3 new milestones added to your Software Engineering path', priority: 'low', href: '/dashboard/roadmap' },
 ];
 
 const quickLinks = [
-  { icon: FileText, label: 'Analyze Resume', desc: 'Upload and score your resume', href: '/dashboard/resume' },
+  { icon: FileText, label: 'Analyze Resume', desc: 'Upload and score your resume', href: '/dashboard/ai/resume-analysis' },
   { icon: Target, label: 'Career Discovery', desc: 'Find roles that match your profile', href: '/dashboard/careers' },
   { icon: Map, label: 'Career Roadmap', desc: 'View your personalized path', href: '/dashboard/roadmap' },
   { icon: BarChart3, label: 'Analytics', desc: 'Track your placement readiness', href: '/dashboard/analytics' },
@@ -80,7 +80,7 @@ export function DashboardContent() {
             Here is a summary of your career progress.
           </p>
         </div>
-        <Link href="/dashboard/resume">
+        <Link href="/dashboard/ai/resume-analysis">
           <Button size="sm">
             Analyze resume
             <ArrowRight className="h-3.5 w-3.5" />
