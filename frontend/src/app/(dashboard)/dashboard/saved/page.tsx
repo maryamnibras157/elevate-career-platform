@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { CareerService } from '@/services/career.service';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -17,6 +18,7 @@ const sortOptions: SortOption[] = [
 ];
 
 export default function SavedCareersPage() {
+  const router = useRouter();
   const [saved, setSaved] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   
@@ -144,7 +146,10 @@ export default function SavedCareersPage() {
             icon={Bookmark}
             title="No saved careers"
             description="You haven't bookmarked any careers yet. Start exploring to save your favorites."
-            action={{ label: "Explore Careers", onClick: () => {} }}
+            action={{
+              label: 'Explore Careers',
+              onClick: () => router.push('/dashboard/careers'),
+            }}
           />
         </div>
       )}
