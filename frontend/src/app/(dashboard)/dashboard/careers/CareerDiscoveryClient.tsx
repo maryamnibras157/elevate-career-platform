@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import {
+  Bookmark,
   BriefcaseBusiness,
   RefreshCw,
   Sparkles,
@@ -11,7 +12,12 @@ import {
 import { CareerService } from '@/services/career.service';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 
 interface Skill {
   id?: string;
@@ -48,6 +54,11 @@ export default function CareerDiscoveryClient() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const [savingCareerId, setSavingCareerId] = useState<string | null>(null);
+  const [savedCareerIds, setSavedCareerIds] = useState<Set<string>>(
+    () => new Set()
+  );
+
   const loadCareers = useCallback(async () => {
     try {
       setIsLoading(true);
@@ -66,6 +77,32 @@ export default function CareerDiscoveryClient() {
       setIsLoading(false);
     }
   }, []);
+
+  const saveCareer = async (careerId: string) => {
+    try {
+      setSavingCareerId(careerId);
+      setError(null);
+
+      await CareerService.toggleSaveCareer(careerId);
+
+      setSavedCareerIds((current) => {
+        const updated = new Set(current);
+
+        if (updated.has(careerId)) {
+          updated.delete(careerId);
+        } else {
+          updated.add(careerId);
+        }
+
+        return updated;
+      });
+    } catch (err) {
+      console.error('Failed to save career:', err);
+      setError('We could not update the saved career. Please try again.');
+    } finally {
+      setSavingCareerId(null);
+    }
+  };
 
   useEffect(() => {
     void loadCareers();
@@ -177,7 +214,9 @@ export default function CareerDiscoveryClient() {
                     )}
                   </div>
 
-                  <CardTitle className="text-lg">{career.title}</CardTitle>
+                  <CardTitle className="text-lg">
+                    {career.title}
+                  </CardTitle>
                 </CardHeader>
 
                 <CardContent className="flex flex-1 flex-col space-y-5">
@@ -224,7 +263,10 @@ export default function CareerDiscoveryClient() {
                       <div className="flex flex-wrap gap-2">
                         {career.skills.map((skill) => (
                           <Badge
-                            key={skill.id ?? `${career.id}-${skill.name}`}
+                            key={
+                              skill.id ??
+                              `${career.id}-${skill.name}`
+                            }
                             variant="secondary"
                           >
                             {skill.name}
@@ -233,6 +275,32 @@ export default function CareerDiscoveryClient() {
                       </div>
                     </div>
                   )}
+
+                  <Button
+                    type="button"
+                    variant={
+                      savedCareerIds.has(career.id)
+                        ? 'secondary'
+                        : 'outline'
+                    }
+                    className="mt-4 w-full"
+                    disabled={savingCareerId === career.id}
+                    onClick={() => void saveCareer(career.id)}
+                  >
+                    <Bookmark
+                      className={`mr-2 h-4 w-4 ${
+                        savedCareerIds.has(career.id)
+                          ? 'fill-current'
+                          : ''
+                      }`}
+                    />
+
+                    {savingCareerId === career.id
+                      ? 'Updating...'
+                      : savedCareerIds.has(career.id)
+                        ? 'Saved'
+                        : 'Save career'}
+                  </Button>
                 </CardContent>
               </Card>
             ))}
