@@ -1,175 +1,201 @@
 # ELEVATE
 
-**The AI Operating System for Student Careers**
+## AI-Powered Career Recommendation & Learning Platform
 
-ELEVATE is a production-ready, enterprise-grade AI-powered SaaS platform that helps students discover careers, analyze resumes, identify skill gaps, generate career roadmaps, and improve placement readiness through explainable AI.
-
----
-
-## Features
-
-- **Resume Analyzer**: PDF/DOCX parsing with AI-driven ATS scoring, keyword extraction, and personalized feedback.
-- **Career Discovery Engine**: AI-powered career recommendations matching user skills to market demand.
-- **Skill Gap Analyzer**: Analyzes the difference between a student's profile and target job descriptions.
-- **Career Roadmap Generator**: AI-generated step-by-step milestones to achieve career goals.
-- **AI Career Mentor**: An interactive AI chat assistant providing career guidance.
-- **Mock Interviews**: Dynamic AI-generated technical and behavioral interviews with instant feedback and scoring.
-- **Admin Dashboard**: Comprehensive administration suite including User Management, Career Management, System Settings, Audit Logs, and Analytics.
-- **Reports & Notifications**: Automated scheduled reporting and dynamic in-app/email notifications, powered by a robust concurrent database scheduler.
+ELEVATE is a full-stack AI-powered web application designed to help students and aspiring professionals make informed career decisions. By combining intelligent career recommendations, AI-powered resume analysis, skill gap detection, and personalized learning roadmaps, the platform provides a comprehensive career guidance experience tailored to each user.
 
 ---
 
-## Tech Stack
+## Live Application
 
-| Layer | Technology |
-|---|---|
-| Frontend | Next.js 15 (App Router), React 19, TypeScript, TailwindCSS, shadcn/ui |
-| State | Zustand, React Query, React Hook Form, Zod |
-| Backend | FastAPI, Python, SQLAlchemy (async), Alembic, Pydantic |
-| Database | PostgreSQL 16 |
-| Cache | Redis 7 |
-| Auth | JWT, Refresh Tokens, Google OAuth |
-| Infrastructure | Docker, Docker Compose |
+**URL:** https://elevate-frontend-qdnz.onrender.com/
 
 ---
 
-## Getting Started
+## Technology Stack
 
-### Prerequisites
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge\&logo=next.js\&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge\&logo=react\&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge\&logo=typescript\&logoColor=white)
+![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge\&logo=nestjs\&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge\&logo=nodedotjs\&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge\&logo=postgresql\&logoColor=white)
 
-- Node.js 20+
-- Python 3.11+
-- PostgreSQL 16
-- Redis 7
-- Docker & Docker Compose (Recommended)
-
----
-
-### Option 1: Docker Compose (Recommended)
-
-The easiest way to run the entire stack for production or testing.
-
-```bash
-# 1. Clone the repository
-git clone <your-repo-url>
-cd CRS
-
-# 2. Set up environment files
-cp backend/.env.example backend/.env
-cp frontend/.env.local.example frontend/.env.local
-
-# 3. Edit the .env files with your secrets (see Environment Variables section)
-
-# 4. Start all services
-docker-compose up -d
-
-# 5. Run database migrations
-docker-compose exec backend alembic upgrade head
-```
-
-Services will be available at:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:8000
-- Swagger Docs: http://localhost:8000/api/docs
+![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge\&logo=prisma\&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge\&logo=tailwindcss\&logoColor=white)
+![shadcn/ui](https://img.shields.io/badge/shadcn/ui-111111?style=for-the-badge)
+![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge\&logo=openai\&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge\&logo=jsonwebtokens\&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge\&logo=render\&logoColor=black)
 
 ---
 
-### Option 2: Local Development
+## Project Highlights
 
-#### Backend Setup
-
-```bash
-cd backend
-python -m venv venv
-# Activate (Windows): venv\Scripts\activate
-# Activate (macOS/Linux): source venv/bin/activate
-
-pip install -r requirements.txt
-cp .env.example .env
-alembic upgrade head
-uvicorn main:app --reload --port 8000
-```
-
-#### Frontend Setup
-
-```bash
-cd frontend
-npm install
-cp .env.local.example .env.local
-npm run dev
-```
+* AI-powered career recommendation engine
+* Intelligent resume analysis and skill extraction
+* Personalized learning roadmaps
+* Skill gap identification
+* Secure authentication and role-based access
+* Interactive user dashboard
+* Administrative management portal
+* Learning resource recommendations
+* Career progress tracking
+* Responsive and modern user interface
 
 ---
 
-## Environment Variables
+## Key Modules
 
-### Backend (`backend/.env`)
+### User Module
 
-| Variable | Description |
-|---|---|
-| `SECRET_KEY` | JWT signing secret (min 32 chars) |
-| `DATABASE_URL` | PostgreSQL async URL (`postgresql+asyncpg://...`) |
-| `DATABASE_URL_SYNC` | PostgreSQL sync URL (`postgresql://...`) |
-| `REDIS_URL` | Redis connection URL |
-| `CORS_ORIGINS` | Comma-separated list of allowed origins |
-| `GEMINI_API_KEY` | API Key for Gemini AI integrations |
-| `MAIL_USERNAME` | SMTP username for sending notifications |
+* Authentication and authorization
+* Personalized dashboard
+* Career recommendation
+* Resume analysis
+* Learning roadmap
+* Skill gap analysis
+* Saved careers
+* Learning resources
+* Profile management
 
-### Frontend (`frontend/.env.local`)
+### Administrator Module
 
-| Variable | Description |
-|---|---|
-| `NEXT_PUBLIC_API_URL` | Backend API URL |
+* Dashboard analytics
+* User management
+* Career management
+* Skill management
+* Roadmap management
+* Learning resource management
+* Resume monitoring
+* Platform insights
 
 ---
 
-## Database Architecture & Migrations
+## AI Features
 
-The system uses an asynchronous SQLAlchemy engine.
-Key models include: `User`, `Session`, `AuditLog`, `ResumeAnalysis`, `Career`, `Skill`, `ReportConfig`, `Notification`.
+### Career Recommendation
 
-```bash
-# Run all pending migrations
-alembic upgrade head
+Generates personalized career suggestions by analyzing user skills, interests, academic background, and career preferences.
 
-# Create a new migration
-alembic revision --autogenerate -m "description"
+### Resume Analyzer
+
+Extracts skills from uploaded resumes, evaluates resume quality, identifies missing competencies, and matches resumes with suitable career paths.
+
+### Personalized Learning Roadmaps
+
+Creates structured learning paths that guide users through the skills and resources required to achieve their target career.
+
+---
+
+## System Architecture
+
+```text
+                                      Users
+                                        │
+                                        ▼
+                     ┌─────────────────────────────────┐
+                     │        Next.js Frontend         │
+                     │ React • TypeScript • Tailwind   │
+                     └───────────────┬─────────────────┘
+                                     │
+                              REST API (JWT)
+                                     │
+                                     ▼
+                     ┌─────────────────────────────────┐
+                     │         NestJS Backend          │
+                     │ Authentication • Business Logic │
+                     │ AI Integration • REST Services  │
+                     └──────────┬───────────┬──────────┘
+                                │           │
+                         Prisma ORM         │
+                                │           │
+                                ▼           ▼
+                     ┌────────────────┐  ┌────────────────┐
+                     │ PostgreSQL DB  │  │   OpenAI API   │
+                     └────────────────┘  └────────────────┘
 ```
 
 ---
 
-## Security & Concurrency Hardening
+## Project Structure
 
-- **Authentication**: Passwords hashed with bcrypt; JWT access and refresh tokens used securely.
-- **Authorization**: Role-based Access Control (RBAC) preventing privilege escalation.
-- **Scheduler Resilience**: Background tasks (Notifications, Reports) use PostgreSQL row-level locks (`SELECT ... FOR UPDATE SKIP LOCKED`) to ensure no duplicate executions across multi-worker or multi-container deployments.
-- **Audit Logging**: Immutable audit logs for all administrative actions and sensitive user events.
-- **SQL Injection**: Prevented via SQLAlchemy ORM abstractions.
-- **Database Performance**: Fully indexed across heavily queried fields (`created_at`, `is_verified`, `status`, etc.).
+```text
+ELEVATE
+│
+├── frontend
+│   ├── app
+│   ├── components
+│   ├── contexts
+│   ├── hooks
+│   ├── services
+│   ├── lib
+│   └── public
+│
+├── backend
+│   ├── prisma
+│   ├── src
+│   │   ├── auth
+│   │   ├── users
+│   │   ├── careers
+│   │   ├── recommendations
+│   │   ├── roadmap
+│   │   ├── resume
+│   │   ├── admin
+│   │   └── common
+│   └── uploads
+│
+└── README.md
+```
 
 ---
 
-## Available Scripts
+## Built With
 
-### Frontend
-```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
-```
+| Category       | Technologies                                        |
+| -------------- | --------------------------------------------------- |
+| Frontend       | Next.js, React, TypeScript, Tailwind CSS, shadcn/ui |
+| Backend        | NestJS, Node.js, TypeScript                         |
+| Database       | PostgreSQL, Prisma ORM                              |
+| Authentication | JWT, Passport.js                                    |
+| AI Integration | OpenAI API                                          |
+| Deployment     | Render                                              |
 
-### Backend
-```bash
-uvicorn main:app --reload          # Development server
-uvicorn main:app --workers 4       # Production (multi-worker)
-alembic upgrade head               # Run migrations
-```
+---
+
+## Future Enhancements
+
+* AI mock interview assistant
+* Internship recommendation system
+* Company recommendation engine
+* Mobile application
+* Multi-language support
+* Advanced analytics and reporting
+
+---
+
+**Developed By**
+
+* Maryam Nibras
 
 ---
 
 ## License
 
-MIT License — see LICENSE file for details.
+This project was developed for academic and educational purposes.
 
-Built with care. Designed for students.
+---
+
+<div align="center">
+
+## ELEVATE
+
+### AI-Powered Career Recommendation & Learning Platform
+
+Helping learners discover the right career path through intelligent recommendations, resume analysis, and personalized learning experiences.
+
+**Live Application:** https://elevate-frontend-qdnz.onrender.com/
+
+</div>
+
+
